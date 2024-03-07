@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_2048.MainPage">
+
+    <StackLayout>
+        <Label Text="2048 by Czerwus" FontSize="40" HorizontalOptions="Center" Margin="10"/>
+        <Grid HorizontalOptions="Center" Margin="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+<!--x, y-->
+<!--0, 0-->
+            <BoxView x:Name="00" Grid.Row="0"
+                Grid.Column="0"
+                BackgroundColor="Red"
+                CornerRadius="10"/>
+<!--0, 1-->
+            <BoxView x:Name="01" Grid.Column="1" 
+                Grid.Row="0"
+                BackgroundColor="Red"
+                CornerRadius="10"/>
+<!--0, 2-->
+            <BoxView x:Name="02" Grid.Row="0"
+                Grid.Column="2"
+                BackgroundColor="Red"
+                CornerRadius="10"/>
+<!--1, 0-->
+            <BoxView x:Name="10" Grid.Row="1"
+                Grid.Column="0"
+                BackgroundColor="Red"
+                CornerRadius="10"/>
+<!--1, 1-->
+            <BoxView x:Name="11" Grid.Row="1"
+                Grid.Column="1"
+                BackgroundColor="Red"
+                CornerRadius="10"/>
+<!--1, 2-->
+            <BoxView x:Name="12" Grid.Row="1"
+                Grid.Column="2"
+                BackgroundColor="Red"
+                CornerRadius="10"/>
+<!--2, 0-->
+            <BoxView x:Name="20" Grid.Row="2"
+                Grid.Column="0"
+                BackgroundColor="Red"
+                CornerRadius="10"/>
+<!--2, 1-->
+            <BoxView x:Name="21" Grid.Row="2"
+                Grid.Column="1"
+                BackgroundColor="Red"
+                CornerRadius="10"/>
+<!--2, 2-->
+            <BoxView x:Name="22" Grid.Row="2"
+                Grid.Column="2"
+                BackgroundColor="Red"
+                CornerRadius="10"/>
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
