@@ -4,8 +4,8 @@
              x:Class="_2048.MainPage">
 
     <StackLayout>
-        <Label Text="2048 by Czerwus" FontSize="40" HorizontalOptions="Center" Margin="10"/>
-        <Grid HorizontalOptions="Center" Margin="50">
+        <Label Text="2048 by Czerwuś" FontSize="40" HorizontalOptions="Center" Margin="10"/>
+        <Grid HorizontalOptions="Center" Margin="0, 50">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition Height="100" />
@@ -16,51 +16,63 @@
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
+<!--Oznaczenia kolorów:-->
+<!--
+rgb(238, 238, 228) = 0
+rgb(244, 195, 178) = 2
+rgb(238, 217, 154) = 4
+rgb(203, 220, 227) = 8
+rgb(192, 106, 71) = 16
+rgb(155, 143, 157) = 32
+rgb(183, 226, 175) = 64
+rgb(113, 210, 227) = 128
+rgb(100, 109, 147) = 256-->
+                
 <!--x, y-->
 <!--0, 0-->
-            <BoxView x:Name="00" Grid.Row="0"
+            <BoxView x:Name="box00" Grid.Row="0"
                 Grid.Column="0"
-                BackgroundColor="Red"
+                BackgroundColor="rgb(238, 238, 228)"
                 CornerRadius="10"/>
 <!--0, 1-->
-            <BoxView x:Name="01" Grid.Column="1" 
+            <BoxView x:Name="box01" Grid.Column="1" 
                 Grid.Row="0"
-                BackgroundColor="Red"
+                BackgroundColor="rgb(238, 238, 228)"
                 CornerRadius="10"/>
 <!--0, 2-->
-            <BoxView x:Name="02" Grid.Row="0"
+            <BoxView x:Name="box02" Grid.Row="0"
                 Grid.Column="2"
-                BackgroundColor="Red"
+                BackgroundColor="rgb(238, 238, 228)"
                 CornerRadius="10"/>
 <!--1, 0-->
-            <BoxView x:Name="10" Grid.Row="1"
+            <BoxView x:Name="box10" Grid.Row="1"
                 Grid.Column="0"
-                BackgroundColor="Red"
+                BackgroundColor="rgb(238, 238, 228)"
                 CornerRadius="10"/>
 <!--1, 1-->
-            <BoxView x:Name="11" Grid.Row="1"
+            <BoxView x:Name="box11" Grid.Row="1"
                 Grid.Column="1"
-                BackgroundColor="Red"
+                BackgroundColor="rgb(238, 238, 228)"
                 CornerRadius="10"/>
 <!--1, 2-->
-            <BoxView x:Name="12" Grid.Row="1"
+            <BoxView x:Name="box12" Grid.Row="1"
                 Grid.Column="2"
-                BackgroundColor="Red"
+                BackgroundColor="rgb(238, 238, 228)"
                 CornerRadius="10"/>
 <!--2, 0-->
-            <BoxView x:Name="20" Grid.Row="2"
+            <BoxView x:Name="box20" Grid.Row="2"
                 Grid.Column="0"
-                BackgroundColor="Red"
+                BackgroundColor="rgb(238, 238, 228)"
                 CornerRadius="10"/>
 <!--2, 1-->
-            <BoxView x:Name="21" Grid.Row="2"
+            <BoxView x:Name="box21" Grid.Row="2"
                 Grid.Column="1"
-                BackgroundColor="Red"
+                BackgroundColor="rgb(238, 238, 228)"
                 CornerRadius="10"/>
 <!--2, 2-->
-            <BoxView x:Name="22" Grid.Row="2"
+            <BoxView x:Name="box22" Grid.Row="2"
                 Grid.Column="2"
-                BackgroundColor="Red"
+                BackgroundColor="rgb(238, 238, 228)"
                 CornerRadius="10"/>
         </Grid>
     </StackLayout>
