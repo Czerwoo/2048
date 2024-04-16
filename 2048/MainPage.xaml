@@ -4,18 +4,24 @@
              x:Class="_2048.MainPage">
 
     <StackLayout>
-        <Label Text="2048 by Czerwuś" FontSize="40" HorizontalOptions="Center" Margin="10"/>
+            <Label Text="2048 by Czerwuś" FontSize="40" HorizontalOptions="Center" Margin="10"/>
+        
         <Button x:Name="restart" Text="Nowa gra" Clicked="restart_Clicked" HorizontalOptions="End" Margin="10"/>
-        <Grid HorizontalOptions="Center"  Margin="0, 50">
+        <!--<Button x:Name="newBoard" Text="XD NOWA PLANSZA" Clicked="newBoard_Clicked" HorizontalOptions="End" IsVisible="false" Margin="10"/>--> 
+        <!--TODO DO ODKOMENTOWANIA PO ZROBIENIU GENERACJI PLANSZY-->
+ 
+        <Grid x:Name="gameView" HorizontalOptions="Center"  Margin="0, 50">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-                <RowDefinition Height="100" />
-                <RowDefinition Height="100" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
 <!--Oznaczenia kolorów:-->
 <!--
@@ -43,8 +49,8 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
 <!--0, 1-->
-            <BoxView x:Name="box01" Grid.Column="1" 
-                Grid.Row="0"
+            <BoxView x:Name="box01" Grid.Row="0"
+                Grid.Column="1" 
                 BackgroundColor="#EEEEE4"
                 CornerRadius="10"/>
             <Label x:Name="label01" Grid.Row="0"
@@ -65,7 +71,22 @@
                    TextColor="Black"
                    FontSize="30"
                    HorizontalOptions="Center"
-                   VerticalOptions="Center"/>                
+                   VerticalOptions="Center"/>
+<!--0, 3-->
+            <BoxView x:Name="box03" Grid.Row="0"
+                Grid.Column="3"
+                BackgroundColor="#EEEEE4"
+                CornerRadius="10"/>
+            <Label x:Name="label03" Grid.Row="0"
+                   Grid.Column="3"
+                   Text=""
+                   TextColor="Black"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+
+<!--next row-->       
 <!--1, 0-->
             <BoxView x:Name="box10" Grid.Row="1"
                 Grid.Column="0"
@@ -101,7 +122,23 @@
                    TextColor="Black"
                    FontSize="30"
                    HorizontalOptions="Center"
-                   VerticalOptions="Center"/>                
+                   VerticalOptions="Center"/>
+<!--1, 3-->
+            <BoxView x:Name="box13" Grid.Row="1"
+                Grid.Column="3"
+                BackgroundColor="#EEEEE4"
+                CornerRadius="10"/>
+            <Label x:Name="label13" Grid.Row="1"
+                   Grid.Column="3"
+                   Text=""
+                   TextColor="Black"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+
+
+<!--next row-->
 <!--2, 0-->
             <BoxView x:Name="box20" Grid.Row="2"
                 Grid.Column="0"
@@ -138,7 +175,81 @@
                    FontSize="30"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
+<!--2, 3-->
+            <BoxView x:Name="box23" Grid.Row="2"
+                Grid.Column="3"
+                BackgroundColor="#EEEEE4"
+                CornerRadius="10"/>
+            <Label x:Name="label23" Grid.Row="2"
+                   Grid.Column="3"
+                   Text=""
+                   TextColor="Black"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+
+<!--next row-->
+<!--3, 0-->
+            <BoxView x:Name="box30" Grid.Row="3"
+                Grid.Column="0"
+                BackgroundColor="#EEEEE4"
+                CornerRadius="10"/>
+            <Label x:Name="label30" Grid.Row="3"
+                   Grid.Column="0"
+                   Text=""
+                   TextColor="Black"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+<!--3, 1-->
+            <BoxView x:Name="box31" Grid.Row="3"
+                Grid.Column="1"
+                BackgroundColor="#EEEEE4"
+                CornerRadius="10"/>
+            <Label x:Name="label31" Grid.Row="3"
+                   Grid.Column="1"
+                   Text=""
+                   TextColor="Black"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+<!--3, 2-->
+            <BoxView x:Name="box32" Grid.Row="3"
+                Grid.Column="2"
+                BackgroundColor="#EEEEE4"
+                CornerRadius="10"/>
+            <Label x:Name="label32" Grid.Row="3"
+                   Grid.Column="2"
+                   Text=""
+                   TextColor="Black"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+<!--3, 3-->
+            <BoxView x:Name="box33" Grid.Row="3"
+                Grid.Column="3"
+                BackgroundColor="#EEEEE4"
+                CornerRadius="10"/>
+            <Label x:Name="label33" Grid.Row="3"
+                   Grid.Column="3"
+                   Text=""
+                   TextColor="Black"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
         </Grid>
+        <Label Text="sterowanie" TextColor="White" HorizontalOptions="Center" FontSize="20"/>
+        <BoxView BackgroundColor="Gray" HeightRequest="500">
+            <BoxView.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped"/>
+                <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped"/>
+                <SwipeGestureRecognizer Direction="Up" Swiped="OnSwiped"/>
+                <SwipeGestureRecognizer Direction="Down" Swiped="OnSwiped"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
     </StackLayout>
+
 
 </ContentPage>

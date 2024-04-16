@@ -22,46 +22,46 @@ namespace _2048
         Xamarin.Forms.Color color128 = Color.FromHex("#71D2E3");
         Xamarin.Forms.Color color256 = Color.FromHex("#646D93");
 
+        //define rules game
+        int maxSizeGame = 4;
+
+
         public MainPage()
         {
             InitializeComponent();
+            //newBoard_Clicked();
             newGame();
         }
-
+ 
         private void newGame()
-        {
+            {
             //Reset Data
-            box00.BackgroundColor = color0;
-            box01.BackgroundColor = color0;
-            box02.BackgroundColor = color0;
-            box10.BackgroundColor = color0;
-            box11.BackgroundColor = color0;
-            box12.BackgroundColor = color0;
-            box20.BackgroundColor = color0;
-            box21.BackgroundColor = color0;
-            box22.BackgroundColor = color0;
+            Xamarin.Forms.BoxView resetBox;
+            Xamarin.Forms.Label resetText;
 
-            label00.Text = "";
-            label01.Text = "";
-            label02.Text = "";
-            label10.Text = "";
-            label11.Text = "";
-            label12.Text = "";
-            label20.Text = "";
-            label21.Text = "";
-            label22.Text = "";
+            for (int i = 0; i < maxSizeGame; i++)
+            {
+                for(int j = 0; j < maxSizeGame; j++)
+                {
+                    resetBox = (Xamarin.Forms.BoxView)FindByName("box" + i + "" + j);
+                    resetText = (Xamarin.Forms.Label)FindByName("label" + i + "" + j);
+                    resetBox.BackgroundColor = color0;
+                    resetText.Text = "";
+                }
+            }
+            
 
             Random rnd = new Random();
-            int row = rnd.Next(0, 3);
-            int column = rnd.Next(0, 3);
+            int row = rnd.Next(0, maxSizeGame);
+            int column = rnd.Next(0, maxSizeGame);
             Xamarin.Forms.BoxView first = (Xamarin.Forms.BoxView)FindByName("box" + row + "" + column);
             Xamarin.Forms.Label firsttext = (Xamarin.Forms.Label)FindByName("label" + row + "" + column);
             Xamarin.Forms.BoxView second;
             Xamarin.Forms.Label secondtext;
             do
             {
-                row = rnd.Next(0, 3);
-                column = rnd.Next(0, 3);
+                row = rnd.Next(0, maxSizeGame);
+                column = rnd.Next(0, maxSizeGame);
                 second = (Xamarin.Forms.BoxView)FindByName("box" + row + "" + column);
                 secondtext = (Xamarin.Forms.Label)FindByName("label" + row + "" + column);
             } while (first == second);
@@ -74,5 +74,70 @@ namespace _2048
         {
             newGame();
         }
+
+        void OnSwiped(object sender, SwipedEventArgs e)
+        {
+            switch (e.Direction)
+            {
+                case SwipeDirection.Left:
+                    Console.WriteLine("w lewo");
+                    for (int i = maxSizeGame-1; i > 0; i--)
+                    {
+                        for (int j = 0; j < maxSizeGame; j++)
+                        {
+                            Xamarin.Forms.Label label = (Xamarin.Forms.Label)FindByName("label" + i + "" + j);
+                            Xamarin.Forms.Label labelback = (Xamarin.Forms.Label)FindByName("label" + i + "" + (j - 1));
+                            
+                            if (label.Text == labelback.Text)
+                            {
+                                Console.WriteLine("jest taki sam");
+                            }
+                            else
+                            {
+                                Console.WriteLine("tekst się różni, po prostu przesuwam");
+                                
+                            }
+                        }
+                    }
+                    break;
+                case SwipeDirection.Right:
+                    Console.WriteLine("w prawo");
+                    break;
+                case SwipeDirection.Up:
+                    Console.WriteLine("w górę");
+                    break;
+                case SwipeDirection.Down:
+                    Console.WriteLine("w dół");
+                    break;
+            }
+        }
+
+
+        //TODO GENEROWANIE PLANSZY! OGARNĘ PÓŹNIEJ - TO JEST PROTOTYP!
+        //private void newBoard_Clicked(object sender, EventArgs e)
+        //{
+        //    Dictionary<string, BoxView> boxViews = new Dictionary<string, BoxView>();
+
+        //    for (int i = 0; i < maxSizeGame; i++)
+        //    {
+        //        for (int j = 0; j < maxSizeGame; j++)
+        //        {
+        //            string dynamicName = "box" + i + "" + j;
+
+        //            BoxView temp_nameBoxView = new BoxView
+        //            {
+        //                BackgroundColor = color8,
+        //                CornerRadius = 10
+        //            };
+
+        //            boxViews.Add(dynamicName, temp_nameBoxView);
+
+        //            gameView.Children.Add(temp_nameBoxView, j, i);
+
+        //        }
+        //    }
+
+
+        //}
     }
 }
