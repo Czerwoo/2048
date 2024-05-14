@@ -27,7 +27,9 @@ namespace _2048
         Xamarin.Forms.Color color256 = Color.FromHex("#646D93");
 
         //define rules game
-        int maxSizeGame = 4;
+        static int maxSizeGame = 4;
+        bool added = false;
+        int[,] board = new int[maxSizeGame, maxSizeGame];
 
 
         public MainPage()
@@ -85,6 +87,7 @@ namespace _2048
                     Console.Write(board[i, j]);
                 }
                 Console.WriteLine();
+
             }
 
         }
@@ -105,24 +108,20 @@ namespace _2048
             }
             fillTable(board);
             return board;
-            //do
-            //{
-            //    row = random.Next(0, maxSizeGame);
-            //    column = random.Next(0, maxSizeGame);
-            //    second = (Xamarin.Forms.BoxView)FindByName("box" + row + "" + column);
-            //    secondtext = (Xamarin.Forms.Label)FindByName("label" + row + "" + column);
-            //} while (first == second);
-            //first.BackgroundColor = color2;
-            //firsttext.Text = "2";
-            //second.BackgroundColor = color2;
-            //secondtext.Text = "2";
         }
  
+            
         private void newGame()
             {
-            int[,] board = new int[maxSizeGame, maxSizeGame];
+            for (int i = 0; i < maxSizeGame; i++)
+            {
+                for (int j = 0; j < maxSizeGame; j++)
+                {
+                    board[i, j] = 0;
+                }
+            }
+                    generateTile(board, 2, 2);
 
-            generateTile(board, 2, 2);
 
             
         }
@@ -136,35 +135,149 @@ namespace _2048
             switch (e.Direction)
             {
                 case SwipeDirection.Left:
-                    Console.WriteLine("w lewo");
-                    for (int i = maxSizeGame-1; i > 0; i--)
+                    MoveLeft();
+                    generateTile(board, 2, 1);
+                    break;
+                case SwipeDirection.Right:
+                    MoveRight();
+                    generateTile(board, 2, 1);
+                    break;
+                case SwipeDirection.Up:
+                    MoveUp();
+                    generateTile(board, 2, 1);
+                    break;
+                case SwipeDirection.Down:
+                    MoveDown();
+                    generateTile(board, 2, 1);
+                    break;
+            }
+        }
+
+        void MoveLeft()
+        {
+            for (int i = 0; i < maxSizeGame; i++)
+            {
+                for (int j = 0; j < maxSizeGame; j++)
+                {
+                    if (board[i, j] != 0)
                     {
-                        for (int j = 0; j < maxSizeGame; j++)
+                        if (j - 1 >= 0)
                         {
-                            Xamarin.Forms.Label label = (Xamarin.Forms.Label)FindByName("label" + i + "" + j);
-                            Xamarin.Forms.Label labelback = (Xamarin.Forms.Label)FindByName("label" + i + "" + (j - 1));
-                            
-                            if (label.Text == labelback.Text)
+                            if (board[i, j - 1] == 0)
                             {
-                                Console.WriteLine("jest taki sam");
+                                board[i, j - 1] = board[i, j];
+                                board[i, j] = 0;
+                                Console.WriteLine("w lewo");
+                                Console.WriteLine("Plansza:");
+                                fillTable(board);
                             }
-                            else
+                            else if (board[i, j - 1] == board[i, j])
                             {
-                                Console.WriteLine("tekst się różni, po prostu przesuwam");
-                                
+                                board[i, j - 1] = board[i, j] * 2;
+                                board[i, j] = 0;
+                                Console.WriteLine("w lewo");
+                                Console.WriteLine("Plansza:");
+                                fillTable(board);
                             }
                         }
                     }
-                    break;
-                case SwipeDirection.Right:
-                    Console.WriteLine("w prawo");
-                    break;
-                case SwipeDirection.Up:
-                    Console.WriteLine("w górę");
-                    break;
-                case SwipeDirection.Down:
-                    Console.WriteLine("w dół");
-                    break;
+                }
+            }
+        }
+
+        void MoveRight()
+        {
+            for (int i = 0; i < maxSizeGame; i++)
+            {
+                for (int j = maxSizeGame - 1; j >= 0; j--)
+                {
+                    if (board[i, j] != 0)
+                    {
+                        if (j + 1 < maxSizeGame)
+                        {
+                            if (board[i, j + 1] == 0)
+                            {
+                                board[i, j + 1] = board[i, j];
+                                board[i, j] = 0;
+                                Console.WriteLine("w prawo");
+                                Console.WriteLine("Plansza:");
+                                fillTable(board);
+                            }
+                            else if (board[i, j + 1] == board[i, j])
+                            {
+                                board[i, j + 1] = board[i, j] * 2;
+                                board[i, j] = 0;
+                                Console.WriteLine("w prawo");
+                                Console.WriteLine("Plansza:");
+                                fillTable(board);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        void MoveUp()
+        {
+            for (int j = 0; j < maxSizeGame; j++)
+            {
+                for (int i = 0; i < maxSizeGame; i++)
+                {
+                    if (board[i, j] != 0)
+                    {
+                        if (i - 1 >= 0)
+                        {
+                            if (board[i - 1, j] == 0)
+                            {
+                                board[i - 1, j] = board[i, j];
+                                board[i, j] = 0;
+                                Console.WriteLine("w górę");
+                                Console.WriteLine("Plansza:");
+                                fillTable(board);
+                            }
+                            else if (board[i - 1, j] == board[i, j])
+                            {
+                                board[i - 1, j] = board[i, j] * 2;
+                                board[i, j] = 0;
+                                Console.WriteLine("w górę");
+                                Console.WriteLine("Plansza:");
+                                fillTable(board);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        void MoveDown()
+        {
+            for (int j = 0; j < maxSizeGame; j++)
+            {
+                for (int i = maxSizeGame - 1; i >= 0; i--)
+                {
+                    if (board[i, j] != 0)
+                    {
+                        if (i + 1 < maxSizeGame)
+                        {
+                            if (board[i + 1, j] == 0)
+                            {
+                                board[i + 1, j] = board[i, j];
+                                board[i, j] = 0;
+                                Console.WriteLine("w dół");
+                                Console.WriteLine("Plansza:");
+                                fillTable(board);
+                            }
+                            else if (board[i + 1, j] == board[i, j])
+                            {
+                                board[i + 1, j] = board[i, j] * 2;
+                                board[i, j] = 0;
+                                Console.WriteLine("w dół");
+                                Console.WriteLine("Plansza:");
+                                fillTable(board);
+                            }
+                        }
+                    }
+                }
             }
         }
 
