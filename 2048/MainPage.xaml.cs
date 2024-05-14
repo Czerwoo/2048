@@ -7,10 +7,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
+
 namespace _2048
 {
     public partial class MainPage : ContentPage
     {
+        //defines
+        Random random = new Random();
+
         //define colors
         Xamarin.Forms.Color color0 = Color.FromHex("#EEEEE4");
         Xamarin.Forms.Color color2 = Color.FromHex("#F4C3B2");
@@ -29,46 +33,98 @@ namespace _2048
         public MainPage()
         {
             InitializeComponent();
-            //newBoard_Clicked();
             newGame();
+        }
+
+        private void fillTable(int[,] board)
+        {
+            //Reset Data On Screen
+            Xamarin.Forms.BoxView resetBox;
+            Xamarin.Forms.Label resetText;
+
+
+
+            Xamarin.Forms.Label DataText;
+            Xamarin.Forms.BoxView DataBox;
+
+            //Update Data On Screen
+            Console.WriteLine("Rzut aktualnego stanu tablicy");
+            for (int i = 0; i < maxSizeGame; i++)
+            {
+                for (int j = 0; j < maxSizeGame; j++)
+                {
+
+                    DataText = (Xamarin.Forms.Label)FindByName("label" + i + "" + j);
+                    string tempData = board[i, j].ToString();
+                    if (tempData != "0")
+                    {
+                        DataText.Text = tempData;
+
+                    } else
+                    {
+                        DataText.Text = "";
+                    }
+
+                    DataBox = (Xamarin.Forms.BoxView)FindByName("box" + i + "" + j);
+                    switch (board[i, j])
+                    {
+                        case 0: DataBox.BackgroundColor = color0; break;
+                        case 2: DataBox.BackgroundColor = color2; break;
+                        case 4: DataBox.BackgroundColor = color4; break;
+                        case 8: DataBox.BackgroundColor = color8; break;
+                        case 16: DataBox.BackgroundColor = color16; break;
+                        case 32: DataBox.BackgroundColor = color32; break;
+                        case 64: DataBox.BackgroundColor = color64; break;
+                        case 128: DataBox.BackgroundColor = color128; break;
+                        case 256: DataBox.BackgroundColor = color256; break;
+
+                    }
+
+
+                    
+                    Console.Write(board[i, j]);
+                }
+                Console.WriteLine();
+            }
+
+        }
+
+        private object generateTile(int[,] board, int quantityTile, int amount) 
+        {
+            int i = 0;
+            while (i < amount)
+            {
+                int row = random.Next(0, maxSizeGame);
+                int column = random.Next(0, maxSizeGame);
+                if (board[column, row] == 0)
+                {
+                    board[column, row] = quantityTile;
+                    i++;
+                }
+
+            }
+            fillTable(board);
+            return board;
+            //do
+            //{
+            //    row = random.Next(0, maxSizeGame);
+            //    column = random.Next(0, maxSizeGame);
+            //    second = (Xamarin.Forms.BoxView)FindByName("box" + row + "" + column);
+            //    secondtext = (Xamarin.Forms.Label)FindByName("label" + row + "" + column);
+            //} while (first == second);
+            //first.BackgroundColor = color2;
+            //firsttext.Text = "2";
+            //second.BackgroundColor = color2;
+            //secondtext.Text = "2";
         }
  
         private void newGame()
             {
-            //Reset Data
-            Xamarin.Forms.BoxView resetBox;
-            Xamarin.Forms.Label resetText;
+            int[,] board = new int[maxSizeGame, maxSizeGame];
 
-            for (int i = 0; i < maxSizeGame; i++)
-            {
-                for(int j = 0; j < maxSizeGame; j++)
-                {
-                    resetBox = (Xamarin.Forms.BoxView)FindByName("box" + i + "" + j);
-                    resetText = (Xamarin.Forms.Label)FindByName("label" + i + "" + j);
-                    resetBox.BackgroundColor = color0;
-                    resetText.Text = "";
-                }
-            }
+            generateTile(board, 2, 2);
+
             
-
-            Random rnd = new Random();
-            int row = rnd.Next(0, maxSizeGame);
-            int column = rnd.Next(0, maxSizeGame);
-            Xamarin.Forms.BoxView first = (Xamarin.Forms.BoxView)FindByName("box" + row + "" + column);
-            Xamarin.Forms.Label firsttext = (Xamarin.Forms.Label)FindByName("label" + row + "" + column);
-            Xamarin.Forms.BoxView second;
-            Xamarin.Forms.Label secondtext;
-            do
-            {
-                row = rnd.Next(0, maxSizeGame);
-                column = rnd.Next(0, maxSizeGame);
-                second = (Xamarin.Forms.BoxView)FindByName("box" + row + "" + column);
-                secondtext = (Xamarin.Forms.Label)FindByName("label" + row + "" + column);
-            } while (first == second);
-            first.BackgroundColor = color2;
-            firsttext.Text = "2";
-            second.BackgroundColor = color2;
-            secondtext.Text = "2";
         }
         private void restart_Clicked(object sender, EventArgs e)
         {
